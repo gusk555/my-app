@@ -86,8 +86,8 @@ export default function TaskFormEdit() {
                 required>
             </input>
             <br /><br />
-            <button className="style-button-1" onClick={() => { SaveEdit(edit, type.value, description.value, requester.value, location.value, priority.value, reqDate.value) }}>Save</button>
-            <button className="style-button-1" onClick={() => CancelEdit()} style={{position:"relative", left:"2%"}}>Cancel</button>
+            <button type="button" className="style-button-1" onClick={() => { SaveEdit(edit, type.value, description.value, requester.value, location.value, priority.value, reqDate.value) }}>Save</button>
+            <button type="button" className="style-button-1" onClick={() => CancelEdit()} style={{position:"relative", left:"2%"}}>Cancel</button>
         </form>
     )
 }

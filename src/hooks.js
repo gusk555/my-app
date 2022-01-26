@@ -33,9 +33,10 @@ export default function TaskProvider({ children }) {
         "labors": [
           {
             "title": "",
-            "number": 0,
+            "workers number": 0,
             "cost rate": 0,
-            "working hours": 0
+            "working hours": 0,
+            "cost": 0
           }
         ],
         "total working hours": 0,
@@ -45,7 +46,7 @@ export default function TaskProvider({ children }) {
             "enquiry category": "0",
             "code": 0,
             "status": "",
-            "price offer": 0
+            "cost": 0
           }
         ],
         "material cost": 0
@@ -74,7 +75,7 @@ export default function TaskProvider({ children }) {
   const SaveEdit = (id, type, description, requester, location, priority, reqDate) => {
     setTasks(tasks.map((task) => {
       if (task.id === id) {
-        return {
+        return {...task,
           "id": id,
           "type": type,
           "description": description,
@@ -90,13 +91,17 @@ export default function TaskProvider({ children }) {
     setEdit(-1);
     setFormChange(0);
   }
-  const SaveEditPlan=(id,startDate,endDate,laborsList)=>{
+  const SaveEditPlan=(id,startDate,endDate,laborsList,totalLaborCost,totalWorkingHours,enquiriesList,totalMaterialCost)=>{
     setTasks(tasks.map((task) => {
-      if (task.id === id) {
+      if (task["id"] === id) {
         return {...task,"planning data":{
           "start date":startDate,
           "end date":endDate,
-          "labors":laborsList
+          "labors":laborsList,
+          "labor cost":totalLaborCost,
+          "total working hours":totalWorkingHours,
+          "enquiries":enquiriesList,
+          "material cost":totalMaterialCost
         } 
         }
         ;

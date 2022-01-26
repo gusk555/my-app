@@ -95,7 +95,7 @@ export default function TaskForm() {
                     required>
                 </input>
                 <br /><br />
-                <button className="style-button-1">Add</button>
+                <button type="submit" className="style-button-1">Add</button>
             </>
         </form>
     );

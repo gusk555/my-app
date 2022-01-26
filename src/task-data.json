@@ -14,32 +14,34 @@
       "end date": "2021-12-27",
       "labors": [
         {
-          "title": "Fitter",
+          "title": "fitter",
           "workers number": 2,
           "cost rate": 4,
-          "working hours": 10
+          "working hours": 10,
+          "cost":0
         },
         {
-          "title": "Helper",
+          "title": "helper",
           "workers number": 4,
           "cost rate": 2,
-          "working hours": 10
+          "working hours": 10,
+          "cost":0
         }
       ],
-      "total working hours": 60,
-      "labor cost": 160,
+      "total working hours": 0,
+      "labor cost": 0,
       "enquiries": [
         {
           "enquiry category": "Steel Enquiry",
           "code": 51324,
           "status": "Items Delivered",
-          "price offer": 3750
+          "cost": 3750
         },
         {
           "enquiry category": "Insulation Enquiry",
           "code": 51632,
           "status": "Waiting for Offer",
-          "price offer": 0
+          "cost": 0
         }
       ],
       "material cost": 3750
@@ -51,19 +53,19 @@
       "labors": [
         {
           "Name": "Ghassan Kamel",
-          "title": "Fitter",
+          "title": "fitter",
           "cost rate": 4,
           "working hours": 10
         },
         {
           "Name": "Gus",
-          "title": "Helper",
+          "title": "helper",
           "cost rate": 2,
           "working hours": 10
         }
       ],
-      "total working hours": 20,
-      "labor cost": 80,
+      "total working hours": 0,
+      "labor cost": 0,
       "material cost": 2000
     }
   },
@@ -82,32 +84,34 @@
       "end date": "2021-12-27",
       "labors": [
         {
-          "title": "Fitter",
+          "title": "fitter",
           "workers number": 2,
           "cost rate": 4,
-          "working hours": 10
+          "working hours": 10,
+          "cost":0
         },
         {
-          "title": "Helper",
+          "title": "helper",
           "workers number": 4,
           "cost rate": 2,
-          "working hours": 10
+          "working hours": 10,
+          "cost":0
         }
       ],
-      "total working hours": 60,
-      "labor cost": 160,
+      "total working hours": 0,
+      "labor cost": 0,
       "enquiries": [
         {
           "enquiry category": "Steel Enquiry",
           "code": 51324,
           "status": "Items Delivered",
-          "price offer": 3750
+          "cost": 3750
         },
         {
           "enquiry category": "Insulation Enquiry",
           "code": 51632,
           "status": "Waiting for Offer",
-          "price offer": 0
+          "cost": 0
         }
       ],
       "material cost": 3750
@@ -119,19 +123,19 @@
       "labors": [
         {
           "Name": "Ghassan Kamel",
-          "title": "Fitter",
+          "title": "fitter",
           "cost rate": 4,
           "working hours": 10
         },
         {
           "Name": "Gus",
-          "title": "Helper",
+          "title": "helper",
           "cost rate": 2,
           "working hours": 10
         }
       ],
-      "total working hours": 20,
-      "labor cost": 80,
+      "total working hours": 0,
+      "labor cost": 0,
       "material cost": 2000
     }
   }

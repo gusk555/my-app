@@ -4,7 +4,7 @@ import "./App.css";
 
 export default function TaskTable() {
   return (
-    <table>
+    <table className="task-table">
       <thead>
         <tr>
           <th>Task ID</th>
