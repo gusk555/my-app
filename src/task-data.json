@@ -1,0 +1,138 @@
+[
+  {
+    "id": "AT1",
+    "type": "Additional Task",
+    "description": "Fabrication and erection of a rails",
+    "location": "Cement Mills",
+    "requester": "Mechanical Maintenance",
+    "request date": "2021-12-14",
+    "priority": "High",
+    "job category": "Fabrication",
+    "status":"In Progress",
+    "planning data": {
+      "start date": "2021-12-14",
+      "end date": "2021-12-27",
+      "labors": [
+        {
+          "title": "Fitter",
+          "workers number": 2,
+          "cost rate": 4,
+          "working hours": 10
+        },
+        {
+          "title": "Helper",
+          "workers number": 4,
+          "cost rate": 2,
+          "working hours": 10
+        }
+      ],
+      "total working hours": 60,
+      "labor cost": 160,
+      "enquiries": [
+        {
+          "enquiry category": "Steel Enquiry",
+          "code": 51324,
+          "status": "Items Delivered",
+          "price offer": 3750
+        },
+        {
+          "enquiry category": "Insulation Enquiry",
+          "code": 51632,
+          "status": "Waiting for Offer",
+          "price offer": 0
+        }
+      ],
+      "material cost": 3750
+    },
+    "actual data": {
+      "start date": "2021-12-14",
+      "end date": "2021-12-27",
+      "progress rate": 50,
+      "labors": [
+        {
+          "Name": "Ghassan Kamel",
+          "title": "Fitter",
+          "cost rate": 4,
+          "working hours": 10
+        },
+        {
+          "Name": "Gus",
+          "title": "Helper",
+          "cost rate": 2,
+          "working hours": 10
+        }
+      ],
+      "total working hours": 20,
+      "labor cost": 80,
+      "material cost": 2000
+    }
+  },
+  {
+    "id": "UC1",
+    "type": "Unsafe Condition",
+    "description": "Fabrication and erection of a walkway",
+    "location": "Kiln 4",
+    "requester": "Kilns",
+    "request date": "2021-12-14",
+    "priority": "Low",
+    "job category": "Erection",
+    "status":"In Progress",
+    "planning data": {
+      "start date": "2021-12-14",
+      "end date": "2021-12-27",
+      "labors": [
+        {
+          "title": "Fitter",
+          "workers number": 2,
+          "cost rate": 4,
+          "working hours": 10
+        },
+        {
+          "title": "Helper",
+          "workers number": 4,
+          "cost rate": 2,
+          "working hours": 10
+        }
+      ],
+      "total working hours": 60,
+      "labor cost": 160,
+      "enquiries": [
+        {
+          "enquiry category": "Steel Enquiry",
+          "code": 51324,
+          "status": "Items Delivered",
+          "price offer": 3750
+        },
+        {
+          "enquiry category": "Insulation Enquiry",
+          "code": 51632,
+          "status": "Waiting for Offer",
+          "price offer": 0
+        }
+      ],
+      "material cost": 3750
+    },
+    "actual data": {
+      "start date": "2021-12-14",
+      "end date": "2021-12-27",
+      "progress rate": 50,
+      "labors": [
+        {
+          "Name": "Ghassan Kamel",
+          "title": "Fitter",
+          "cost rate": 4,
+          "working hours": 10
+        },
+        {
+          "Name": "Gus",
+          "title": "Helper",
+          "cost rate": 2,
+          "working hours": 10
+        }
+      ],
+      "total working hours": 20,
+      "labor cost": 80,
+      "material cost": 2000
+    }
+  }
+]
