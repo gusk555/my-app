@@ -1,0 +1,26 @@
+[
+    {
+        "department":"Cement Mills",
+        "manager":"Amer Najjar"
+    },
+    {
+        "department":"Kilns",
+        "manager":"Jahed Osta"
+    },
+    {
+        "department":"Packing Plant",
+        "manager":"Amer Najjar"
+    },
+    {
+        "department":"Quarry",
+        "manager":"Sayed Horkoss"
+    },
+    {
+        "department":"PGD",
+        "manager":"Joe Rahme"
+    },
+    {
+        "department":"Mechanical Maintenance",
+        "manager":"Joseph Frangieh"
+    }
+]
