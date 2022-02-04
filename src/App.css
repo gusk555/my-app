@@ -10,7 +10,6 @@
   width:fit-content;
   color: #FFFFFF;
   cursor: pointer;
-  display: inline-block;
   font-family: -apple-system,system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   font-size: 16px;
   font-weight: 500;
@@ -29,16 +28,15 @@
   box-shadow: 5px 5px 10px gray;
   transform: scale(1.1,1.1);
 }
-.style-button-1:disabled{
-  visibility: hidden;
-}
 /* button style */
 
 /* Tasks Table Style*/
 table{
+  table-layout:auto;
   position: relative;
   margin: 10px;
   width: 95%;
+  height: 40%;
 }
 thead{
   background: linear-gradient(to right, #0051ff, #30acff);
@@ -48,11 +46,7 @@ thead{
 td,th{
   padding: 5px;
   text-align: center;
-  overflow-y: auto;
-}
-tbody{
-  max-height: 10px;
-  overflow-y: scroll;
+  overflow: hidden;
 }
 table tbody tr:hover{
   background:linear-gradient(to right, #97b8ff, #ceecff);

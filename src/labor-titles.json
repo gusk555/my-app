@@ -1,0 +1,22 @@
+[
+    {
+        "title":"Group Leader",
+        "cost rate":6
+    },
+    {
+        "title":"Fitter",
+        "cost rate":5
+    },
+    {
+        "title":"Welder",
+        "cost rate":4
+    },
+    {
+        "title":"Machinist",
+        "cost rate":4
+    },
+    {
+        "title":"Helper",
+        "cost rate":3
+    }
+]

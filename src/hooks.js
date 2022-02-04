@@ -12,7 +12,7 @@ export const useInput = (initialValue) => {
 export default function TaskProvider({ children }) {
   const [tasks, setTasks] = useState(taskData);
   const [edit, setEdit] = useState(-1);
-  const [formChange,setFormChange]=useState(0);
+  const [formChange, setFormChange] = useState(0);
   const RemoveTask = (id) => {
     setTasks(tasks.filter((task) => task.id !== id));
   };
@@ -75,7 +75,8 @@ export default function TaskProvider({ children }) {
   const SaveEdit = (id, type, description, requester, location, priority, reqDate) => {
     setTasks(tasks.map((task) => {
       if (task.id === id) {
-        return {...task,
+        return {
+          ...task,
           "id": id,
           "type": type,
           "description": description,
@@ -91,20 +92,21 @@ export default function TaskProvider({ children }) {
     setEdit(-1);
     setFormChange(0);
   }
-  const SaveEditPlan=(id,startDate,endDate,laborsList,totalLaborCost,totalWorkingHours,enquiriesList,totalMaterialCost)=>{
+  const SaveEditPlan = (id, startDate, endDate, laborsList, totalLaborCost, totalWorkingHours, enquiriesList, totalMaterialCost) => {
     setTasks(tasks.map((task) => {
       if (task["id"] === id) {
-        return {...task,"planning data":{
-          "start date":startDate,
-          "end date":endDate,
-          "labors":laborsList,
-          "labor cost":totalLaborCost,
-          "total working hours":totalWorkingHours,
-          "enquiries":enquiriesList,
-          "material cost":totalMaterialCost
-        } 
+        return {
+          ...task, "planning data": {
+            "start date": startDate,
+            "end date": endDate,
+            "labors": laborsList,
+            "labor cost": totalLaborCost,
+            "total working hours": totalWorkingHours,
+            "enquiries": enquiriesList,
+            "material cost": totalMaterialCost
+          }
         }
-        ;
+          ;
       }
       else return task;
     }
@@ -117,7 +119,7 @@ export default function TaskProvider({ children }) {
     setFormChange(0);
   }
   return (
-    <TaskContext.Provider value={{ tasks, edit, RemoveTask, AddTask, EditTask, SaveEdit, CancelEdit,SaveEditPlan,formChange,setFormChange }}>
+    <TaskContext.Provider value={{ tasks, edit, RemoveTask, AddTask, EditTask, SaveEdit, CancelEdit, SaveEditPlan, formChange, setFormChange }}>
       {children}
     </TaskContext.Provider>
   );

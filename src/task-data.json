@@ -18,14 +18,14 @@
           "workers number": 2,
           "cost rate": 4,
           "working hours": 10,
-          "cost":0
+          "cost":80
         },
         {
           "title": "helper",
           "workers number": 4,
           "cost rate": 2,
           "working hours": 10,
-          "cost":0
+          "cost":80
         }
       ],
       "total working hours": 0,
