@@ -7,8 +7,8 @@ import enquiryStatus from "./enquiry-status.json";
 export default function PlanningDataForm() {
     const [hiddenLabButt, setHiddenLabButt] = useState(true);
     const [hiddenEnqButt, setHiddenEnqButt] = useState(true);
-    const [hiddenLabSaveEditButt,setHiddenLabSaveEditButt]=useState(-1);
-    const [hiddenEnqSaveEditButt,setHiddenEnqSaveEditButt]=useState(-1);
+    const [hiddenLabEditRemoveButt,setHiddenLabEditRemoveButt]=useState(-1);
+    const [hiddenEnqEditRemoveButt,setHiddenEnqEditRemoveButt]=useState(-1);
     const { edit, setFormChange } = useTask();
     const { tasks, SaveEditPlan, CancelEdit } = useTask();
     const taskEdit = tasks.filter((task) => task["id"] === edit);
@@ -58,14 +58,14 @@ export default function PlanningDataForm() {
                 <tbody>
                     {(laborsList).map((labor, index) => {
                         return (
-                            <tr key={index} onMouseEnter={()=>setHiddenLabSaveEditButt(index)} onMouseLeave={()=>setHiddenLabSaveEditButt(-1)}>
+                            <tr key={index} onMouseEnter={()=>setHiddenLabEditRemoveButt(index)} onMouseLeave={()=>setHiddenLabEditRemoveButt(-1)}>
                                 <td>{labor["title"]}</td>
                                 <td>{labor["workers number"]}</td>
                                 <td>{labor["cost rate"]}</td>
                                 <td>{labor["working hours"]}</td>
                                 <td>{labor["cost"] = (labor["workers number"] * labor["cost rate"] * labor["working hours"] || 0)}</td>
-                                <td style={{ backgroundColor: "White" }} hidden={(index===hiddenLabSaveEditButt)?false:true}><button type="button">Edit</button></td>
-                                <td style={{ backgroundColor: "White" }} hidden={(index===hiddenLabSaveEditButt)?false:true}><button type="button">Remove</button></td>
+                                <td style={{ backgroundColor: "White" }} hidden={(index===hiddenLabEditRemoveButt)?false:true}><button type="button">Edit</button></td>
+                                <td style={{ backgroundColor: "White" }} hidden={(index===hiddenLabEditRemoveButt)?false:true}><button type="button">Remove</button></td>
                             </tr>
                         )
                     })
@@ -134,13 +134,13 @@ export default function PlanningDataForm() {
                 <tbody>
                     {(enquiriesList).map((enquiry, index) => {
                         return (
-                            <tr key={index} onMouseEnter={()=>setHiddenEnqSaveEditButt(index)} onMouseLeave={()=>setHiddenEnqSaveEditButt(-1)}>
+                            <tr key={index} onMouseEnter={()=>setHiddenEnqEditRemoveButt(index)} onMouseLeave={()=>setHiddenEnqEditRemoveButt(-1)}>
                                 <td>{enquiry["enquiry category"]}</td>
                                 <td>{enquiry["code"]}</td>
                                 <td>{enquiry["status"]}</td>
                                 <td>{enquiry["cost"]}</td>
-                                <td style={{ backgroundColor: "White" }} hidden={(index===hiddenEnqSaveEditButt)?false:true}><button type="button">Edit</button></td>
-                                <td style={{ backgroundColor: "White" }} hidden={(index===hiddenEnqSaveEditButt)?false:true}><button type="button">Remove</button></td>
+                                <td style={{ backgroundColor: "White" }} hidden={(index===hiddenEnqEditRemoveButt)?false:true}><button type="button">Edit</button></td>
+                                <td style={{ backgroundColor: "White" }} hidden={(index===hiddenEnqEditRemoveButt)?false:true}><button type="button">Remove</button></td>
                             </tr>
                         )
                     })
