@@ -3,10 +3,10 @@ import { useTask } from "./hooks.js";
 
 export default function Task({ id, type, description, requester, location, priority, reqDate }) {
     const { edit, RemoveTask, EditTask } = useTask();
-    const [hiddenTaskSaveEditButt,setHiddenTaskSaveEditButt]=useState(-1);
+    const [hiddenTaskSaveEditButt,setHiddenTaskSaveEditButt]=useState("");
     const toggleDisabled=(edit===-1)?false:true;
         return (
-            <tr key={id} onMouseEnter={()=>setHiddenTaskSaveEditButt(id)} onMouseLeave={()=>setHiddenTaskSaveEditButt(-1)}>
+            <tr key={id} onMouseEnter={()=>setHiddenTaskSaveEditButt(id)} onMouseLeave={()=>setHiddenTaskSaveEditButt("")}>
                 <td>{id}</td>
                 <td>{type}</td>
                 <td>{description}</td>
