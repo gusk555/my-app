@@ -45,7 +45,7 @@ export default function PlanningDataForm() {
                 type="date">
             </input>
             <br /><br />
-            <table className="planned-table">
+            <table className="planned-labor-table">
                 <thead>
                     <tr>
                         <th>Title</th>
@@ -64,8 +64,8 @@ export default function PlanningDataForm() {
                                 <td>{labor["cost rate"]}</td>
                                 <td>{labor["working hours"]}</td>
                                 <td>{labor["cost"] = (labor["workers number"] * labor["cost rate"] * labor["working hours"] || 0)}</td>
-                                <td style={{ backgroundColor: "White" }} hidden={(index===hiddenLabEditRemoveButt)?false:true}><button type="button">Edit</button></td>
-                                <td style={{ backgroundColor: "White" }} hidden={(index===hiddenLabEditRemoveButt)?false:true}><button type="button">Remove</button></td>
+                                <td style={{ backgroundColor: "White" }} hidden={(index===hiddenLabEditRemoveButt)?false:true}><button className="style-button-1" type="button">Edit</button></td>
+                                <td style={{ backgroundColor: "White" }} hidden={(index===hiddenLabEditRemoveButt)?false:true}><button className="style-button-1" type="button">Remove</button></td>
                             </tr>
                         )
                     })
@@ -122,7 +122,7 @@ export default function PlanningDataForm() {
             <br />
             <label>Total Labor Cost: </label>{totalLaborCost}
             <br /><br />
-            <table className="planned-table">
+            <table className="planned-enquiry-table">
                 <thead>
                     <tr>
                         <th>Category</th>
@@ -139,8 +139,8 @@ export default function PlanningDataForm() {
                                 <td>{enquiry["code"]}</td>
                                 <td>{enquiry["status"]}</td>
                                 <td>{enquiry["cost"]}</td>
-                                <td style={{ backgroundColor: "White" }} hidden={(index===hiddenEnqEditRemoveButt)?false:true}><button type="button">Edit</button></td>
-                                <td style={{ backgroundColor: "White" }} hidden={(index===hiddenEnqEditRemoveButt)?false:true}><button type="button">Remove</button></td>
+                                <td style={{ backgroundColor: "White" }} hidden={(index===hiddenEnqEditRemoveButt)?false:true}><button className="style-button-1" type="button">Edit</button></td>
+                                <td style={{ backgroundColor: "White" }} hidden={(index===hiddenEnqEditRemoveButt)?false:true}><button className="style-button-1" type="button">Remove</button></td>
                             </tr>
                         )
                     })
