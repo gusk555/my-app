@@ -3,6 +3,7 @@ import { useTask, useInput } from "./hooks.js";
 import labTitles from "./labor-titles.json";
 import enqCategories from "./enquiry-categories.json";
 import enquiryStatus from "./enquiry-status.json";
+import PlanningDataFormNewEntry from "./PlanningDataFormNewEntry.js"
 
 export default function PlanningDataForm() {
     const [hiddenLabButt, setHiddenLabButt] = useState(true);
@@ -259,15 +260,14 @@ export default function PlanningDataForm() {
                                                 placeholder="select a title"
                                                 value={laborsTitle.value}
                                                 onChange={laborsTitle.onChange}>
-                                                <option value={labor["title"]} disabled hidden>Select a Requester</option>
+                                                <option value="" disabled hidden>Select a Requester</option>
                                                 {labTitles.map((title, i) => { return (<option key={i} value={title["title"]}>{title["title"]}</option>) })}
                                             </select>
                                         </td>
                                         <td><input
                                             id="planned-workers-number"
-                                            type="text"                                            
-                                            {...laborsWorkersNumber}
-                                            value={labor["workers number"]}>
+                                            type="text"
+                                            {...laborsWorkersNumber}>
                                         </input>
                                         </td>
                                         <td>{laborsRate}</td>
