@@ -7,9 +7,9 @@ import enquiryStatus from "./enquiry-status.json";
 export default function PlanningDataForm() {
     const [hiddenLabButt, setHiddenLabButt] = useState(true);
     const [hiddenEnqButt, setHiddenEnqButt] = useState(true);
-    const [hiddenLabEditRemoveButt,setHiddenLabEditRemoveButt]=useState(-1);
-    const [hiddenEnqEditRemoveButt,setHiddenEnqEditRemoveButt]=useState(-1);
-    const { edit, setFormChange } = useTask();
+    const [hiddenLabEditRemoveButt, setHiddenLabEditRemoveButt] = useState(-1);
+    const [hiddenEnqEditRemoveButt, setHiddenEnqEditRemoveButt] = useState(-1);
+    const { edit, setFormChange, planLaborEdit, EditPlanLabor } = useTask();
     const { tasks, SaveEditPlan, CancelEdit } = useTask();
     const taskEdit = tasks.filter((task) => task["id"] === edit);
     const [startDate] = useInput(taskEdit[0]["planning data"]["start date"]);
@@ -29,124 +29,129 @@ export default function PlanningDataForm() {
     var totalWorkingHours = ((laborsList).map(labor => labor["working hours"] * labor["workers number"]).reduce((prev, curr) => prev + curr, 0) || 0);
     var totalLaborCost = ((laborsList).map(labor => labor["cost"]).reduce((prev, curr) => parseInt(prev) + parseInt(curr), 0) || 0);
     var totalMaterialCost = ((enquiriesList).map(enquiry => enquiry["cost"]).reduce((prev, curr) => parseInt(prev) + parseInt(curr), 0) || 0);
-    return (
-        <form onChange={() => { setFormChange(2) }}>
-            <label htmlFor="planned start date">Start Date: </label>
-            <input
-                id="planned start date"
-                {...startDate}
-                type="date">
-            </input>
-            <br /><br />
-            <label htmlFor="planned end date">End Date: </label>
-            <input
-                id="planned end date"
-                {...endDate}
-                type="date">
-            </input>
-            <br /><br />
-            <table className="planned-labor-table">
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Workers</th>
-                        <th>Cost Rate</th>
-                        <th>Working Hours</th>
-                        <th>Cost</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {(laborsList).map((labor, index) => {
-                        return (
-                            <tr key={index} onMouseEnter={()=>setHiddenLabEditRemoveButt(index)} onMouseLeave={()=>setHiddenLabEditRemoveButt(-1)}>
-                                <td>{labor["title"]}</td>
-                                <td>{labor["workers number"]}</td>
-                                <td>{labor["cost rate"]}</td>
-                                <td>{labor["working hours"]}</td>
-                                <td>{labor["cost"] = (labor["workers number"] * labor["cost rate"] * labor["working hours"] || 0)}</td>
-                                <td style={{ backgroundColor: "White" }} hidden={(index===hiddenLabEditRemoveButt)?false:true}><button className="style-button-1" type="button">Edit</button></td>
-                                <td style={{ backgroundColor: "White" }} hidden={(index===hiddenLabEditRemoveButt)?false:true}><button className="style-button-1" type="button">Remove</button></td>
-                            </tr>
-                        )
-                    })
-                    }
-                    <tr onChange={() => setHiddenLabButt(false)}>
-                        <td>
-                            <select
-                                id="planned-labor-title"
-                                placeholder="select a title"
-                                value={laborsTitle.value}
-                                onChange={laborsTitle.onChange}>
-                                <option value="" disabled hidden>Select a Requester</option>
-                                {labTitles.map((title, i) => { return (<option key={i} value={title["title"]}>{title["title"]}</option>) })}
-                            </select>
-                        </td>
-                        <td><input
-                            id="planned-workers-number"
-                            type="text"
-                            {...laborsWorkersNumber}>
-                        </input>
-                        </td>
-                        <td>{laborsRate}</td>
-                        <td><input
-                            id="planned-working-hours"
-                            type="text"
-                            {...laborsWorkingHours}>
-                        </input>
-                        </td>
-                        <td>{laborsCost}</td>
-                        <td style={{ backgroundColor: "White" }}><button type="button" hidden={hiddenLabButt} onClick={() => {
-                            setLaborsList([...laborsList, { "title": laborsTitle.value, "workers number": laborsWorkersNumber.value, "cost rate": laborsRate, "working hours": laborsWorkingHours.value, "cost": laborsCost }]);
-                            resetLaborsTitle();
-                            resetLaborsWorkersNumber();
-                            laborsRate = 0;
-                            resetLaborsWorkingHours();
-                            laborsCost = 0;
-                            setHiddenLabButt(true);
+    if (planLaborEdit === -1) {
+        return (
+            <form onChange={() => { setFormChange(2) }}>
+                <label htmlFor="planned start date">Start Date: </label>
+                <input
+                    id="planned start date"
+                    {...startDate}
+                    type="date">
+                </input>
+                <br /><br />
+                <label htmlFor="planned end date">End Date: </label>
+                <input
+                    id="planned end date"
+                    {...endDate}
+                    type="date">
+                </input>
+                <br /><br />
+                <table className="planned-labor-table">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Workers</th>
+                            <th>Cost Rate</th>
+                            <th>Working Hours</th>
+                            <th>Cost</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {(laborsList).map((labor, index) => {
+                            return (
+                                <tr key={index} onMouseEnter={() => setHiddenLabEditRemoveButt(index)} onMouseLeave={() => setHiddenLabEditRemoveButt(-1)}>
+                                    <td>{labor["title"]}</td>
+                                    <td>{labor["workers number"]}</td>
+                                    <td>{labor["cost rate"]}</td>
+                                    <td>{labor["working hours"]}</td>
+                                    <td>{labor["cost"] = (labor["workers number"] * labor["cost rate"] * labor["working hours"] || 0)}</td>
+                                    <td style={{ backgroundColor: "White", width: "5%" }} hidden={(index === hiddenLabEditRemoveButt) ? false : true}>
+                                        <button className="style-button-1" type="button" onClick={() => EditPlanLabor(index)}>Edit</button>
+                                    </td>
+                                    <td style={{ backgroundColor: "White", width: "5%" }} hidden={(index === hiddenLabEditRemoveButt) ? false : true}>
+                                        <button className="style-button-1" type="button">Remove</button>
+                                    </td>
+                                </tr>
+                            )
+                        })
                         }
+                        <tr onChange={() => setHiddenLabButt(false)}>
+                            <td>
+                                <select
+                                    id="planned-labor-title"
+                                    placeholder="select a title"
+                                    value={laborsTitle.value}
+                                    onChange={laborsTitle.onChange}>
+                                    <option value="" disabled hidden>Select a Requester</option>
+                                    {labTitles.map((title, i) => { return (<option key={i} value={title["title"]}>{title["title"]}</option>) })}
+                                </select>
+                            </td>
+                            <td><input
+                                id="planned-workers-number"
+                                type="text"
+                                {...laborsWorkersNumber}>
+                            </input>
+                            </td>
+                            <td>{laborsRate}</td>
+                            <td><input
+                                id="planned-working-hours"
+                                type="text"
+                                {...laborsWorkingHours}>
+                            </input>
+                            </td>
+                            <td>{laborsCost}</td>
+                            <td style={{ backgroundColor: "White" }}><button type="button" hidden={hiddenLabButt} onClick={() => {
+                                setLaborsList([...laborsList, { "title": laborsTitle.value, "workers number": laborsWorkersNumber.value, "cost rate": laborsRate, "working hours": laborsWorkingHours.value, "cost": laborsCost }]);
+                                resetLaborsTitle();
+                                resetLaborsWorkersNumber();
+                                laborsRate = 0;
+                                resetLaborsWorkingHours();
+                                laborsCost = 0;
+                                setHiddenLabButt(true);
+                            }
+                            }
+                            >Save</button></td>
+                            <td style={{ backgroundColor: "White" }}><button type="button" hidden={hiddenLabButt} onClick={() => {
+                                resetLaborsTitle();
+                                resetLaborsWorkersNumber();
+                                laborsRate = 0;
+                                resetLaborsWorkingHours();
+                                laborsCost = 0;
+                                setHiddenLabButt(true)
+                            }
+                            }>Cancel</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <label>Total Working Hours: </label>{totalWorkingHours}
+                <br />
+                <label>Total Labor Cost: </label>{totalLaborCost}
+                <br /><br />
+                <table className="planned-enquiry-table">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Enquiry Code</th>
+                            <th>Status</th>
+                            <th>Cost</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {(enquiriesList).map((enquiry, index) => {
+                            return (
+                                <tr key={index} onMouseEnter={() => setHiddenEnqEditRemoveButt(index)} onMouseLeave={() => setHiddenEnqEditRemoveButt(-1)}>
+                                    <td>{enquiry["enquiry category"]}</td>
+                                    <td>{enquiry["code"]}</td>
+                                    <td>{enquiry["status"]}</td>
+                                    <td>{enquiry["cost"]}</td>
+                                    <td style={{ backgroundColor: "White", width: "5%" }} hidden={(index === hiddenEnqEditRemoveButt) ? false : true}><button className="style-button-1" type="button">Edit</button></td>
+                                    <td style={{ backgroundColor: "White", width: "5%" }} hidden={(index === hiddenEnqEditRemoveButt) ? false : true}><button className="style-button-1" type="button">Remove</button></td>
+                                </tr>
+                            )
+                        })
                         }
-                        >Save</button></td>
-                        <td style={{ backgroundColor: "White" }}><button type="button" hidden={hiddenLabButt} onClick={() => {
-                            resetLaborsTitle();
-                            resetLaborsWorkersNumber();
-                            laborsRate = 0;
-                            resetLaborsWorkingHours();
-                            laborsCost = 0;
-                            setHiddenLabButt(true)
-                        }
-                        }>Cancel</button></td>
-                    </tr>
-                </tbody>
-            </table>
-            <label>Total Working Hours: </label>{totalWorkingHours}
-            <br />
-            <label>Total Labor Cost: </label>{totalLaborCost}
-            <br /><br />
-            <table className="planned-enquiry-table">
-                <thead>
-                    <tr>
-                        <th>Category</th>
-                        <th>Enquiry Code</th>
-                        <th>Status</th>
-                        <th>Cost</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {(enquiriesList).map((enquiry, index) => {
-                        return (
-                            <tr key={index} onMouseEnter={()=>setHiddenEnqEditRemoveButt(index)} onMouseLeave={()=>setHiddenEnqEditRemoveButt(-1)}>
-                                <td>{enquiry["enquiry category"]}</td>
-                                <td>{enquiry["code"]}</td>
-                                <td>{enquiry["status"]}</td>
-                                <td>{enquiry["cost"]}</td>
-                                <td style={{ backgroundColor: "White" }} hidden={(index===hiddenEnqEditRemoveButt)?false:true}><button className="style-button-1" type="button">Edit</button></td>
-                                <td style={{ backgroundColor: "White" }} hidden={(index===hiddenEnqEditRemoveButt)?false:true}><button className="style-button-1" type="button">Remove</button></td>
-                            </tr>
-                        )
-                    })
-                    }
-                    <tr onChange={() => setHiddenEnqButt(false)}>
-                        <td><select
+                        <tr onChange={() => setHiddenEnqButt(false)}>
+                            <td><select
                                 id="planned-enquiry-categories"
                                 placeholder="select a category"
                                 value={enqCat.value}
@@ -154,13 +159,13 @@ export default function PlanningDataForm() {
                                 <option value="" disabled hidden>Select a Category</option>
                                 {enqCategories.map((cat, i) => { return (<option key={i} value={cat}>{cat}</option>) })}
                             </select>
-                        </td>
-                        <td><input
-                            type="text"
-                            {...enqCode}>
-                        </input>
-                        </td>
-                        <td><select
+                            </td>
+                            <td><input
+                                type="text"
+                                {...enqCode}>
+                            </input>
+                            </td>
+                            <td><select
                                 id="planned-enquiry-status"
                                 placeholder="select a status"
                                 value={enqStatus.value}
@@ -168,37 +173,154 @@ export default function PlanningDataForm() {
                                 <option value="" disabled hidden>Select a Status</option>
                                 {enquiryStatus.map((stat, i) => { return (<option key={i} value={stat}>{stat}</option>) })}
                             </select>
-                        </td>
-                        <td><input
-                            type="text"
-                            {...enqCost}>
-                        </input>
-                        </td>
-                        <td style={{ backgroundColor: "White" }}><button type="button" hidden={hiddenEnqButt} onClick={() => {
-                            setEnquiriesList([...enquiriesList, { "enquiry category": enqCat.value, "code": enqCode.value, "status": enqStatus.value, "cost": enqCost.value }]);
-                            resetEnqCat();
-                            resetEnqCode();
-                            resetEnqStatus();
-                            resetEnqCost();
-                            setHiddenEnqButt(true);
+                            </td>
+                            <td><input
+                                type="text"
+                                {...enqCost}>
+                            </input>
+                            </td>
+                            <td style={{ backgroundColor: "White" }}><button type="button" hidden={hiddenEnqButt} onClick={() => {
+                                setEnquiriesList([...enquiriesList, { "enquiry category": enqCat.value, "code": enqCode.value, "status": enqStatus.value, "cost": enqCost.value }]);
+                                resetEnqCat();
+                                resetEnqCode();
+                                resetEnqStatus();
+                                resetEnqCost();
+                                setHiddenEnqButt(true);
+                            }
+                            }
+                            >Save</button></td>
+                            <td style={{ backgroundColor: "White" }}><button type="button" hidden={hiddenEnqButt} onClick={() => {
+                                resetEnqCat();
+                                resetEnqCode();
+                                resetEnqStatus();
+                                resetEnqCost();
+                                setHiddenEnqButt(true)
+                            }
+                            }>Cancel</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <label>Total Material Cost: </label>{totalMaterialCost}
+                <br /><br />
+                <button type="button" className="style-button-1" onClick={() => SaveEditPlan(edit, startDate.value, endDate.value, laborsList, totalLaborCost, totalWorkingHours, enquiriesList, totalMaterialCost)}>Save</button>
+                <button type="button" className="style-button-1" onClick={() => CancelEdit()} style={{ position: "relative", left: "2%" }}>Cancel</button>
+            </form>
+        )
+    }
+    else {
+        return (
+            <form onChange={() => { setFormChange(2) }}>
+                <label htmlFor="planned start date">Start Date: </label>
+                <input
+                    disabled
+                    id="planned start date"
+                    {...startDate}
+                    type="date">
+                </input>
+                <br /><br />
+                <label htmlFor="planned end date">End Date: </label>
+                <input
+                    disabled
+                    id="planned end date"
+                    {...endDate}
+                    type="date">
+                </input>
+                <br /><br />
+                <table className="planned-labor-table">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Workers</th>
+                            <th>Cost Rate</th>
+                            <th>Working Hours</th>
+                            <th>Cost</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {(laborsList).map((labor, index) => {
+                            if (planLaborEdit !== index) {
+                                return (
+                                    <tr key={index} onMouseEnter={() => setHiddenLabEditRemoveButt(index)} onMouseLeave={() => setHiddenLabEditRemoveButt(-1)}>
+                                        <td>{labor["title"]}</td>
+                                        <td>{labor["workers number"]}</td>
+                                        <td>{labor["cost rate"]}</td>
+                                        <td>{labor["working hours"]}</td>
+                                        <td>{labor["cost"] = (labor["workers number"] * labor["cost rate"] * labor["working hours"] || 0)}</td>
+
+                                    </tr>
+                                )
+                            }
+                            else {
+                                return (
+                                    <tr key={index}>
+                                        <td>
+                                            <select
+                                                id="planned-labor-title"
+                                                placeholder="select a title"
+                                                value={laborsTitle.value}
+                                                onChange={laborsTitle.onChange}>
+                                                <option value={labor["title"]} disabled hidden>Select a Requester</option>
+                                                {labTitles.map((title, i) => { return (<option key={i} value={title["title"]}>{title["title"]}</option>) })}
+                                            </select>
+                                        </td>
+                                        <td><input
+                                            id="planned-workers-number"
+                                            type="text"                                            
+                                            {...laborsWorkersNumber}
+                                            value={labor["workers number"]}>
+                                        </input>
+                                        </td>
+                                        <td>{laborsRate}</td>
+                                        <td><input
+                                            id="planned-working-hours"
+                                            type="text"
+                                            {...laborsWorkingHours}>
+                                        </input>
+                                        </td>
+                                        <td>{laborsCost}</td>
+                                        <td>{labor["cost"] = (labor["workers number"] * labor["cost rate"] * labor["working hours"] || 0)}</td>
+                                        <td style={{ backgroundColor: "White", width: "5%" }} hidden={(index === hiddenLabEditRemoveButt) ? false : true}>
+                                            <button className="style-button-1" type="button" onClick={() => EditPlanLabor(index)}>Save</button>
+                                        </td>
+                                        <td style={{ backgroundColor: "White", width: "5%" }} hidden={(index === hiddenLabEditRemoveButt) ? false : true}>
+                                            <button className="style-button-1" type="button">Cancel</button>
+                                        </td>
+                                    </tr>)
+                            }
+                        })
                         }
+                    </tbody>
+                </table>
+                <label>Total Working Hours: </label>{totalWorkingHours}
+                <br />
+                <label>Total Labor Cost: </label>{totalLaborCost}
+                <br /><br />
+                <table className="planned-enquiry-table">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Enquiry Code</th>
+                            <th>Status</th>
+                            <th>Cost</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {(enquiriesList).map((enquiry, index) => {
+                            return (
+                                <tr key={index} onMouseEnter={() => setHiddenEnqEditRemoveButt(index)} onMouseLeave={() => setHiddenEnqEditRemoveButt(-1)} disabled>
+                                    <td>{enquiry["enquiry category"]}</td>
+                                    <td>{enquiry["code"]}</td>
+                                    <td>{enquiry["status"]}</td>
+                                    <td>{enquiry["cost"]}</td>
+                                </tr>
+                            )
+                        })
                         }
-                        >Save</button></td>
-                        <td style={{ backgroundColor: "White" }}><button type="button" hidden={hiddenEnqButt} onClick={() => {
-                            resetEnqCat();
-                            resetEnqCode();
-                            resetEnqStatus();
-                            resetEnqCost();
-                            setHiddenEnqButt(true)
-                        }
-                        }>Cancel</button></td>
-                    </tr>
-                </tbody>
-            </table>
-            <label>Total Material Cost: </label>{totalMaterialCost}
-            <br /><br />
-            <button type="button" className="style-button-1" onClick={() => SaveEditPlan(edit, startDate.value, endDate.value, laborsList, totalLaborCost, totalWorkingHours, enquiriesList, totalMaterialCost)}>Save</button>
-            <button type="button" className="style-button-1" onClick={() => CancelEdit()} style={{ position: "relative", left: "2%" }}>Cancel</button>
-        </form>
-    )
+                    </tbody>
+                </table>
+                <label>Total Material Cost: </label>{totalMaterialCost}
+                <br /><br />
+            </form>
+        )
+    }
 }

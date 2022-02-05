@@ -12,6 +12,7 @@ export const useInput = (initialValue) => {
 export default function TaskProvider({ children }) {
   const [tasks, setTasks] = useState(taskData);
   const [edit, setEdit] = useState(-1);
+  const [planLaborEdit,setPlanLaborEdit]=useState(-1);
   const [formChange, setFormChange] = useState(0);
   const RemoveTask = (id) => {
     setTasks(tasks.filter((task) => task.id !== id));
@@ -118,8 +119,12 @@ export default function TaskProvider({ children }) {
     setEdit(-1);
     setFormChange(0);
   }
+  const EditPlanLabor = (index)=>{
+    setPlanLaborEdit(index);
+    setFormChange(2);
+  }
   return (
-    <TaskContext.Provider value={{ tasks, edit, RemoveTask, AddTask, EditTask, SaveEdit, CancelEdit, SaveEditPlan, formChange, setFormChange }}>
+    <TaskContext.Provider value={{ tasks, edit, RemoveTask, AddTask, EditTask, SaveEdit, CancelEdit, SaveEditPlan, formChange, setFormChange,planLaborEdit,EditPlanLabor }}>
       {children}
     </TaskContext.Provider>
   );
