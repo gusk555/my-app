@@ -14,6 +14,10 @@ export default function TaskForm() {
     const submit = e => {
         e.preventDefault();
         AddTask(id, type.value, description.value, requester.value, location.value, priority.value,reqDate.value);
+        fetch("src\task-data.json",{
+            method:"POST",
+            body:JSON.stringify({description})
+        })
         resetType();
         resetDescription();
         resetRequester();
